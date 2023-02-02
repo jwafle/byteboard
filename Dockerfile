@@ -1,6 +1,8 @@
 # Use an official node image as the base image
 FROM node:19.5.0
 
+ARG PORT
+
 # Set the working directory in the container to /app
 WORKDIR /app
 
