@@ -5,7 +5,7 @@ FROM node:19.5.0
 WORKDIR /app
 
 # Copy the package.json and package-lock.json to the container
-COPY package*.json ./
+COPY package*.json .
 
 # Install the app's dependencies in the container
 RUN npm install
