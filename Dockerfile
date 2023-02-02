@@ -19,4 +19,4 @@ COPY . .
 CMD ["node", "index.js"]
 
 # Expose the app's default port
-EXPOSE 3000
+EXPOSE $PORT
