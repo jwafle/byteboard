@@ -2,6 +2,12 @@
 FROM node:19.5.0
 
 ARG PORT
+ARG DATABASE_URL
+ARG PGDATABASE
+ARG PGHOST
+ARG PGPASSWORD
+ARG PGPORT
+ARG PGUSER
 
 # Set the working directory in the container to /app
 WORKDIR /app
