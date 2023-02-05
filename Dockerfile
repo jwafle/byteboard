@@ -8,6 +8,8 @@ ARG PGHOST
 ARG PGPASSWORD
 ARG PGPORT
 ARG PGUSER
+ARG AUTH0_DOMAIN
+ARG API_IDENTIFIER
 
 # Set the working directory in the container to /app
 WORKDIR /app

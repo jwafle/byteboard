@@ -1,34 +1,20 @@
-const express = require("express");
-const graphqlHTTP = require("express-graphql").graphqlHTTP;
-const { buildSchema } = require("graphql");
-const PORT = process.env.PORT || 3000;
+const { ApolloServer } = require("apollo-server");
+const { typeDefs } = require("./schema");
+const { resolvers } = require("./resolvers");
+const { measurementAPI } = require('./datasources/measurement');
+const { userAPI } = require('./datasources/user');
+require('dotenv').config()
 
-if (PORT === 3000) {
-  console.log("Running in development mode");
-  HOST = '127.0.0.1'
-} else {
-  HOST = '0.0.0.0'
-}
+const PORT = process.env.PORT;
+const HOST = process.env.HOST;
 
-// Construct a schema, using GraphQL schema language
-const schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`);
+const server = new ApolloServer({ 
+  typeDefs,
+  resolvers,
+  dataSources: () => ({
+    userAPI: new measurementAPI({ knexInstance: knex }),
+    measurementAPI: new userAPI({ knexInstance: knex }),
+  }),
+ });
 
-// Provide resolver functions for your schema fields
-const resolvers = {
-  hello: () => `returning pg user = ${process.env.PGUSER}`
-};
-
-const app = express();
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema,
-    rootValue: resolvers
-  })
-);
-
-app.listen(PORT, HOST, () => console.log(`Server running on port: ${PORT}`));
+server.listen(PORT, HOST).then(() => console.log(`Server running on port: ${PORT}`));
