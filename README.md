@@ -41,7 +41,7 @@ type CreateMeasurementResponse {
   measurement: Measurement
 }
 ```
-Created or Updated User Response
+Created or Updated User Response:
 ```
 type CreateOrUpdateUserResponse {
   success: Boolean!
