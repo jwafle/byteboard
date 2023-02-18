@@ -21,12 +21,6 @@ type Measurement {
     duration: Float
 }
 
-type CreateUserResponse {
-    success: Boolean!
-    message: String
-    user: User
-}
-
 type CreateMeasurementResponse {
     success: Boolean!
     message: String
