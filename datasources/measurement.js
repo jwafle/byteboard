@@ -1,5 +1,5 @@
-const knex = require('../database/knex');
-const { DataSource } = require('apollo-datasource');
+const knex = require("../database/knex");
+const { DataSource } = require("apollo-datasource");
 
 class measurementAPI extends DataSource {
     constructor({ knexInstance }) {

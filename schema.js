@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server');
+const { gql } = require("apollo-server");
 
 const typeDefs = gql`
 type User {
@@ -7,14 +7,14 @@ type User {
     last_name: String!
     weight: Float
     measurements: [Measurement]
-    createdAt: String
+    created_at: String
 }
 
 type Measurement {
     meausurement_id: ID!
     user_id: ID
     weight: Float
-    createdAt: String!
+    created_at: String!
     values: [Float]!
     frequency: Int!
     max_value: Float
@@ -33,7 +33,13 @@ type CreateMeasurementResponse {
     measurement: Measurement
 }
 
-type UpdateUserResponse {
+type CreateOrUpdateUserResponse {
+    success: Boolean!
+    message: String
+    user: User
+}
+
+type DeleteUserResponse {
     success: Boolean!
     message: String
     user: User
@@ -59,6 +65,8 @@ type Query {
 
 type Mutation {
     createOrUpdateUser(first_name: String!, last_name: String!, weight: Float): CreateOrUpdateUserResponse!
+    deleteUser(user_id: ID!): DeleteUserResponse!
+    deleteUserByName(first_name: String!, last_name: String!): DeleteUserResponse!
     createMeasurement(user_id: ID, weight: Float, values: [Float]!, frequency: Int!): CreateMeasurementResponse!
     assignMeasurement(user_id: ID!, measurement_id: ID!): AssignMeasurementResponse!
 }
